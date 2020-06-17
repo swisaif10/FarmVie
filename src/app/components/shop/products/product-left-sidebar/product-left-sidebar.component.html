@@ -1,0 +1,160 @@
+
+<mat-sidenav-container fullscreen>
+  <mat-sidenav [opened]="false" mode="over"  #start  class="sidenav">
+      <button mat-icon-button color="warn" class="close" (click)="start.close()">
+        <mat-icon color="warn">close</mat-icon>
+      </button>
+      <div class="divider"></div>
+      <div class="sidebar-items" fxLayout="column" >
+          <app-sidebar *ngFor="let item of navItems" [item]="item"></app-sidebar>
+      </div>
+  </mat-sidenav>
+  <mat-toolbar class="main-topbar" [ngClass]="{topbar_four: url == '/home/four'}">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="top-bar container" >
+              <span fxHide="false" fxHide.gt-sm   >
+                  <button mat-icon-button (click)="start.toggle()">
+                      <mat-icon>menu</mat-icon>
+                  </button>
+               </span>
+            <div fxLayout="row" class="welcome-message">
+              <div class="widget-text">
+                <a mat-button [matMenuTriggerFor]="currencyMenu" #currencyMenuTrigger="matMenuTrigger">
+                  {{currency}}<mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
+                </a>
+                <mat-menu #currencyMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+                  <span>
+                      <button mat-menu-item *ngFor="let cur of currencies" (click)="changeCurrency(cur)">
+                          <span>{{cur}}</span>
+                      </button>
+                  </span>
+              </mat-menu>
+              </div>
+              <div class="widget-text">
+                <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
+                  <img [src]="flag.image" width="18">
+                  <span fxShow="false" fxShow.gt-sm class="flag-menu-title">{{flag.name}}</span>
+                  <mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
+              </a>
+              <mat-menu #langMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+                  <span>
+                      <button mat-menu-item *ngFor="let flag of flags" (click)="changeLang(flag)">
+                          <img [src]="flag.image" width="18"> {{flag.name}}
+                      </button>
+                  </span>
+              </mat-menu>
+              </div>
+            </div>
+            <div class="widgets-left" fxLayout="row">
+
+              <div class="widget-text">
+                <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/wishlist']" routerLinkActive="router-link-active" ><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon> WISHLIST</a>
+              </div>
+              <div class="widget-text">
+                <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/compare']" routerLinkActive="router-link-active" ><mat-icon>cached</mat-icon>COMPARE</a>
+              </div>
+              <div class="widget-text">
+                  <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/my-account']" routerLinkActive="router-link-active" ><mat-icon>person</mat-icon>My Account</a>
+                </div>
+            </div>
+
+
+
+
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+    <app-header-three></app-header-three>
+
+<div class="left-sidebar-wrapper sec-padding">
+<div class="container">
+  <div class="sidebar-wrapper" fxLayout='row' fxLayout.lt-md="column" >
+      <div fxFlex="25" fxFlex.lt-sm="100" class="filter-sidenav" perfectScrollbar>
+          <div class="toggles-wrapper" fxLayout="column" fxLayout.lt-md="column">
+              <div class="toggles" fxFlex.lt-md="100">
+                  <mat-accordion>
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              <span>Categories</span>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                    <app-categories></app-categories>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span>Brands</span>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+
+                          <div class="brands">
+                             <app-brands (brandChanged)="onBrendsChanged($event)"></app-brands>
+                           </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                  <span>Price</span>
+                              </mat-panel-title>
+                            </mat-expansion-panel-header>
+
+                            <app-price (priceFilters)="updatePriceFilters($event)"></app-price>
+                          </mat-expansion-panel>
+                    </mat-accordion>
+              </div>
+                  <div class="popular-products" fxFlex.lt-md="100">
+                    <app-popular-products></app-popular-products>
+                  </div>
+          </div>
+
+          </div>
+        <div fxFlex="75" fxFlex.lt-sm="100" class="all-products" ngClass.gt-sm="p-left">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxHide.lt-md="true" class="filter-row mat-elevation-z1 text-muted">
+                <button *ngIf="!sidenavOpen" mat-icon-button (click)="sidenav.toggle()">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <div >
+                    <select (change)="onChangeSorting($event.target.value)">
+                        <option value="asc">Sorting items</option>
+                        <option value="asc">Ascending Order</option>
+                        <option value="desc">Descending Order</option>
+                        <option value="a-z">Alphabetically, A-Z</option>
+                        <option value="z-a">Alphabetically, Z-A</option>
+                        <option value="low">Price, low to high</option>
+                        <option value="high">Price, high to low</option>
+                      </select>
+
+                </div>
+                <div>
+
+                    <button mat-icon-button (click)="changeViewType('list', 100)">
+                        <mat-icon>view_list</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="changeViewType('list', 33.3)">
+                        <mat-icon>view_module</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="changeViewType('list', 25)">
+                        <mat-icon>view_comfy</mat-icon>
+                    </button>
+                </div>
+              </div>
+              <div [@Animation]="animation" fxLayout="row wrap" class="products-wrapper">
+                  <div *ngFor="let products of allItems | orderBy:sortByOrder | paginate: { itemsPerPage: 12, currentPage: page  }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+                     <div class="product-box">
+                        <app-product [product]="products"></app-product>
+                     </div>
+                  </div>
+              </div>
+
+              <div *ngIf="products.length > 0" fxLayout="row wrap ">
+                  <div fxFlex="100">
+                      <mat-card class="p-0 text-center no-shadow">
+                          <pagination-controls class="product-pagination" autoHide="true" maxSize="5" (pageChange)="onPageChanged($event)"></pagination-controls>
+                      </mat-card>
+                  </div>
+              </div>
+            </div>
+  </div>
+</div>
+</div>
+<app-footer-two  ></app-footer-two>

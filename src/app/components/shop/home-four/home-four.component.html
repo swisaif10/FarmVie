@@ -1,0 +1,159 @@
+
+<mat-sidenav-container fullscreen>
+  <mat-sidenav [opened]="false" mode="over"  #start  class="sidenav">
+      <button mat-icon-button color="warn" class="close" (click)="start.close()">
+        <mat-icon color="warn">close</mat-icon>
+      </button>
+      <div class="divider"></div>
+      <div class="sidebar-items" fxLayout="column" >
+          <app-sidebar *ngFor="let item of navItems" [item]="item"></app-sidebar>
+      </div>
+  </mat-sidenav>
+  <mat-toolbar class="main-topbar" [ngClass]="{topbar_four: url == '/home/four'}">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="top-bar container" >
+              <span fxHide="false" fxHide.gt-sm   >
+                  <button mat-icon-button (click)="start.toggle()">
+                      <mat-icon>menu</mat-icon>
+                  </button>
+               </span>
+            <div fxLayout="row" class="welcome-message">
+              <div class="widget-text">
+                <a mat-button [matMenuTriggerFor]="currencyMenu" #currencyMenuTrigger="matMenuTrigger">
+                  {{currency}}<mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
+                </a>
+                <mat-menu #currencyMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+                  <span>
+                      <button mat-menu-item *ngFor="let cur of currencies" (click)="changeCurrency(cur)">
+                          <span>{{cur}}</span>
+                      </button>
+                  </span>
+              </mat-menu>
+              </div>
+              <div class="widget-text">
+                <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
+                  <img [src]="flag.image" width="18">
+                  <span fxShow="false" fxShow.gt-sm class="flag-menu-title">{{flag.name}}</span>
+                  <mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
+              </a>
+              <mat-menu #langMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+                  <span>
+                      <button mat-menu-item *ngFor="let flag of flags" (click)="changeLang(flag)">
+                          <img [src]="flag.image" width="18"> {{flag.name}}
+                      </button>
+                  </span>
+              </mat-menu>
+              </div>
+            </div>
+            <div class="widgets-left" fxLayout="row">
+
+              <div class="widget-text">
+                <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/wishlist']" routerLinkActive="router-link-active" ><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon> WISHLIST</a>
+              </div>
+              <div class="widget-text">
+                <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/compare']" routerLinkActive="router-link-active" ><mat-icon>cached</mat-icon>COMPARE</a>
+              </div>
+              <div class="widget-text">
+                  <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/my-account']" routerLinkActive="router-link-active" ><mat-icon>person</mat-icon>My Account</a>
+                </div>
+            </div>
+
+
+
+
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+    <app-header-three></app-header-three>
+
+<app-main-carousel [slides]="slides"></app-main-carousel>
+<div class="home-1-wrap">
+
+    <div  class="info-bar-four-wrapper">
+        <div class="container">
+            <div fxLayout="row wrap" class="info-bar-four">
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                 <mat-icon class="mat-icon-xlg  m-0">card_giftcard</mat-icon>
+                 <div class="content">
+                   <p>BONUS PLUS</p>
+                   <span class="text-muted m-0">Get a bonus plus for buying more that three products</span>
+                 </div>
+               </mat-card>
+             </div>
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                 <mat-icon class="mat-icon-xlg  m-0">local_shipping</mat-icon>
+                 <div class="content">
+                   <p>FREE SHIPPING</p>
+                   <span class="text-muted m-0">Free shipping on all orders over $99</span>
+                 </div>
+               </mat-card>
+             </div>
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                 <mat-icon class="mat-icon-xlg m-0">monetization_on</mat-icon>
+                 <div class="content">
+                   <p>MONEY BACK GUARANTEE</p>
+                   <span class="text-muted m-0">100% money back guarantee</span>
+                 </div>
+               </mat-card>
+             </div>
+             <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+               <mat-card class="light-block no-bd" fxLayout="row"  fxLayoutAlign="start center">
+                 <mat-icon class="mat-icon-xlg m-0">history</mat-icon>
+                 <div class="content">
+                   <p>ONLINE SUPPORT 24/7</p>
+                   <span class="text-muted m-0">Call us: 02 3555 65454 55</span>
+                 </div>
+               </mat-card>
+             </div>
+         </div>
+           </div>
+    </div>
+            
+ 
+    <div class="container">
+        <div class="products sec-padding">
+          <div class="products-four">
+
+              <h3>POPULAR ITEMS</h3>
+              <app-product-carousel [product]="products | slice:0:8"></app-product-carousel>
+
+          </div>
+
+        </div>
+        </div>
+        <div class="featured-products-wrap">
+            <div class="container">
+                <div class="products sec-padding bg">
+                        <div class="products-four">
+
+                            <h3>FEATURED ITEMS</h3>
+                            <app-product-carousel [product]="products | slice:8:16"></app-product-carousel>
+
+                        </div>
+                    </div>
+
+                  </div>
+        </div>
+        <div class="main-banner">
+            <app-banner-promotion></app-banner-promotion>
+      </div>
+          <div class="container">
+        <app-product-vertical [products]="products"></app-product-vertical>
+        </div>
+       
+       <div class="blog-section sec-padding">
+         <div class="container">
+           <div class="section-title">
+              <h3>Latest From Our Blog</h3>
+              <p>Business analytics (BA) is the practice of iterative, methodical exploration of an<br> 
+                  organization's data with emphasis on statistical analysis.</p>
+           </div>
+          
+           <app-blog-section></app-blog-section>
+         </div>
+       </div>
+
+  </div>
+  <app-footer-two  ></app-footer-two>

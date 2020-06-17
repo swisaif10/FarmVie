@@ -1,0 +1,157 @@
+
+<mat-sidenav-container fullscreen>
+  <mat-sidenav [opened]="false" mode="over"  #start  class="sidenav">
+      <button mat-icon-button color="warn" class="close" (click)="start.close()">
+        <mat-icon color="warn">close</mat-icon>
+      </button>
+      <div class="divider"></div>
+      <div class="sidebar-items" fxLayout="column" >
+          <app-sidebar *ngFor="let item of navItems" [item]="item"></app-sidebar>
+      </div>
+  </mat-sidenav>
+  <mat-toolbar class="main-topbar" [ngClass]="{topbar_four: url == '/home/four'}">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="top-bar container" >
+              <span fxHide="false" fxHide.gt-sm   >
+                  <button mat-icon-button (click)="start.toggle()">
+                      <mat-icon>menu</mat-icon>
+                  </button>
+               </span>
+            <div fxLayout="row" class="welcome-message">
+              <div class="widget-text">
+                <a mat-button [matMenuTriggerFor]="currencyMenu" #currencyMenuTrigger="matMenuTrigger">
+                  {{currency}}<mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
+                </a>
+                <mat-menu #currencyMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+                  <span>
+                      <button mat-menu-item *ngFor="let cur of currencies" (click)="changeCurrency(cur)">
+                          <span>{{cur}}</span>
+                      </button>
+                  </span>
+              </mat-menu>
+              </div>
+              <div class="widget-text">
+                <a mat-button [matMenuTriggerFor]="langMenu" #langMenuTrigger="matMenuTrigger">
+                  <img [src]="flag.image" width="18">
+                  <span fxShow="false" fxShow.gt-sm class="flag-menu-title">{{flag.name}}</span>
+                  <mat-icon class="mat-icon-sm caret cur-icon">arrow_drop_down</mat-icon>
+              </a>
+              <mat-menu #langMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown">
+                  <span>
+                      <button mat-menu-item *ngFor="let flag of flags" (click)="changeLang(flag)">
+                          <img [src]="flag.image" width="18"> {{flag.name}}
+                      </button>
+                  </span>
+              </mat-menu>
+              </div>
+            </div>
+            <div class="widgets-left" fxLayout="row">
+
+              <div class="widget-text">
+                <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/wishlist']" routerLinkActive="router-link-active" ><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon> WISHLIST</a>
+              </div>
+              <div class="widget-text">
+                <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/compare']" routerLinkActive="router-link-active" ><mat-icon>cached</mat-icon>COMPARE</a>
+              </div>
+              <div class="widget-text">
+                  <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/my-account']" routerLinkActive="router-link-active" ><mat-icon>person</mat-icon>My Account</a>
+                </div>
+            </div>
+
+
+
+
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+    <app-header-three></app-header-three>
+
+    <div class="faq sec-padding">
+  <div class="container">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"  class="p-0">
+        <div fxFlex="100" fxFlex.gt-sm="50" class="questions">
+            <div class="faq-wrap">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>What is do i have to tell you a few lorem?</span>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <p>
+                          Lorem ipsum dolor sit amet, consectetur adi pisi cing elit, sed do eiusmod tempor exercitationemut labore. Love life’s sweetest reward Let it flow it floats back to you.
+                        </p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              <span>What is do i have to tell you a few lorem?</span>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adi pisi cing elit, sed do eiusmod tempor exercitationemut labore. Love life’s sweetest reward Let it flow it floats back to you.
+                          </p>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span>What is do i have to tell you a few lorem?</span>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <p>
+                              Lorem ipsum dolor sit amet, consectetur adi pisi cing elit, sed do eiusmod tempor exercitationemut labore. Love life’s sweetest reward Let it flow it floats back to you.
+                            </p>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                  <span>What is do i have to tell you a few lorem?</span>
+                              </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adi pisi cing elit, sed do eiusmod tempor exercitationemut labore. Love life’s sweetest reward Let it flow it floats back to you.
+                              </p>
+                          </mat-expansion-panel>
+                  </mat-accordion>
+            </div>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="50" class="faq-form">
+            <div class="text-wrap">
+              <div class="title">
+                  <h3>Our Management</h3>
+              </div>
+                <p>Business analytics (BA) is the practice of iterative, methodical exploration of an
+                    organization's data with emphasis on statistical analysis.</p>
+                    <form fxLayout="row wrap">
+                        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Your Name (required)" #name="ngModel" ngModel name="name" required>
+                                <mat-error *ngIf="name.invalid">Please enter a valid message</mat-error>
+                              </mat-form-field>
+                        </div>
+                        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Your Email (required)" #email="ngModel" ngModel name="email" required>
+                                <mat-error *ngIf="email.invalid">Please enter a valid message</mat-error>
+                              </mat-form-field>
+                        </div>
+                        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field class="w-100">
+                                <input matInput placeholder="Subject" #subject="ngModel" ngModel name="subject" required>
+                                <mat-error *ngIf="subject.invalid">Please enter a valid message</mat-error>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <button class="btn-project" mat-raised-button color="accent" type="submit">GET A QUOTE</button>
+                          </div>
+                        </form>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<app-footer-two  ></app-footer-two>
