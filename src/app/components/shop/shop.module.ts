@@ -33,6 +33,9 @@ import { HomeFiveComponent } from './home-five/home-five.component';
 import { ContactComponent } from '../pages/contact/contact.component';
 import { FaqComponent } from '../pages/faq/faq.component';
 import { AboutUsComponent } from '../pages/about-us/about-us.component';
+import { AddProjetComponent } from './add-projet/add-projet.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { MyAccountComponent } from '../pages/my-account/my-account.component';
 
 
 @NgModule({
@@ -60,7 +63,10 @@ import { AboutUsComponent } from '../pages/about-us/about-us.component';
     ProductZoomComponent,
     HomeFiveComponent,
     FaqComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AddProjetComponent,
+    InscriptionComponent,
+    MyAccountComponent
   ],
   imports: [
     CommonModule,

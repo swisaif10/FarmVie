@@ -26,6 +26,10 @@ export class ProductService {
   constructor(private httpClient: HttpClient, public snackBar: MatSnackBar) {
    this.compareProducts.subscribe(products => products = products)
   }
+   products2():Observable<Product[]> {
+    return  this.httpClient.get<Product[]>('http://localhost:8080/projet/getimage');
+
+  }
 
   private products(): Observable<Product[]> {
     return this.httpClient.get<Product[]>('assets/data/products2.json');
@@ -111,15 +115,7 @@ public removeFromCompare(product: Product) {
 
    // Get Products By category
    public getProductByCategory(category: string): Observable<Product[]> {
-    return this.products().pipe(map(items =>
-       items.filter((item: Product) => {
-         if(category == 'all')
-            return item
-            else
-            return item.category === category;
-
-       })
-     ));
+    return this.products2()
   }
 
 }

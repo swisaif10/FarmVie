@@ -29,7 +29,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
      WishlistComponent,
     CompareComponent,
     CheckoutComponent,
-    MyAccountComponent,
+   // MyAccountComponent,
     ErrorPageComponent
 
   ]

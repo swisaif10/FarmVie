@@ -22,7 +22,9 @@ export class Product {
   category?: string;
   tags?: ProductTags[];
   colors?: ProductColor[];
-
+  nomProjet?: string;
+  photoProjet?: string;
+  montantMin?: string;
   constructor(
     id?: number,
     name?: string,

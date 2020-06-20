@@ -16,13 +16,16 @@ import { MainComponent } from './components/main/main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ShopModule } from './components/shop/shop.module';
 import { SharedModule } from './components/shared/shared.module';
-
+import { TokenStorage } from './components/shared/services/token-storage.service';
+import { AuthService } from './components/shared/services/auth-service.service';
+ 
 
 @NgModule({
   declarations: [
     AppComponent,
     DemoComponent,
-    MainComponent
+    MainComponent,
+     
 
 
 
@@ -39,7 +42,7 @@ import { SharedModule } from './components/shared/shared.module';
     AppRoutingModule,
     NgxImgZoomModule
   ],
-  providers: [],
+  providers: [TokenStorage,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

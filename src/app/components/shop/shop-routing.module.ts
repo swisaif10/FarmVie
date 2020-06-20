@@ -10,10 +10,14 @@ import { HomeFiveComponent } from './home-five/home-five.component';
 import { ContactComponent } from '../pages/contact/contact.component';
 import { FaqComponent } from '../pages/faq/faq.component';
 import { AboutUsComponent } from '../pages/about-us/about-us.component';
+import { AddProjetComponent } from './add-projet/add-projet.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { MyAccountComponent } from '../pages/my-account/my-account.component';
 
 
 // Routes
 const routes: Routes = [
+  
   { path: 'one', component: HomeComponent },
   { path: 'two', component: HomeTwoComponent },
   { path: 'three', component: HomeThreeComponent },
@@ -21,6 +25,9 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'about', component: AboutUsComponent },
+  { path: 'addd', component: AddProjetComponent },
+  { path: 'inscrit', component: InscriptionComponent },
+  { path: 'pages/my-account', component: MyAccountComponent },
 
   { path: 'five', component: HomeFiveComponent },
   { path: 'products/:category', component: ProductLeftSidebarComponent },

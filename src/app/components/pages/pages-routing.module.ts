@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'wishlist', component: WishlistComponent },
       { path: 'compare', component: CompareComponent },
-      { path: 'my-account', component: MyAccountComponent },
+      //{ path: 'my-account', component: MyAccountComponent },
       { path: 'error', component: ErrorPageComponent },
     ]
   }
