@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/modals/product.model';
 import { CartItem } from 'src/app/modals/cart-item';
@@ -15,7 +15,7 @@ import { TokenStorage } from '../../shared/services/token-storage.service';
 })
 export class AddProjetComponent  {
 
-     
+     test=1;
       public banners = [];
 public currencies = ['USD', 'EUR'];
 public currency:any;
@@ -41,7 +41,7 @@ public slides = [
   { title: 'Massive sale', subtitle: 'Only for today', image: 'assets/images/carousel/banner5.jpg' }
 ];
 tokenn=null;
-constructor(private productService: ProductService, private token :TokenStorage,private httpClient: HttpClient, private cartService: CartService) {
+constructor(private router : Router,private productService: ProductService, private token :TokenStorage,private httpClient: HttpClient, private cartService: CartService) {
   this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
 this.tokenn=this.token.getToken()
 
@@ -111,8 +111,8 @@ this.flag = flag;
         }
        
         onUpload(f: NgForm) {
-          (async () =>{
-    
+          this.test=2;
+     
           console.log(this.selectedFile);
       
           const uploadImageData = new FormData();
@@ -134,18 +134,17 @@ this.flag = flag;
           uploadImageData.append('photoProjet', this.selectedFile2, this.selectedFile2.name);
           console.log(f.value['irrigation'])
 
-          
-          this.httpClient.post('http://localhost:8080/projet/add', uploadImageData)
+          let headers = new HttpHeaders({
+            'Authorization':this.token.getToken()
+          })
+          this.httpClient.post('http://localhost:8080/projet/add', uploadImageData,{ headers: headers})
        
             .subscribe((response) => {
-              console.log(response)
-       
+              this.router.navigateByUrl('products/:category')       
             }
        
             );
-            await this.delay(700);
-    
-           })();
+            
     
        
         }

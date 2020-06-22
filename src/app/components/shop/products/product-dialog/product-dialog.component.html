@@ -35,9 +35,8 @@
                 <span class="text-muted fw-500">Quantity</span>
                 <div fxLayout="row" fxLayout.xs="column"  class="text-muted mt-15">
                   <div fxLayout="row" fxLayoutAlign="center start">
-                      <button mat-icon-button matTooltip="Remove" (click)="decrement()"><mat-icon>remove</mat-icon></button>
-                      <input type="text" name="quantity" value="{{counter}}" class="form-control input-number">
-                      <button mat-icon-button matTooltip="Add" (click)="increment()"><mat-icon>add</mat-icon></button>
+                    <input   #name="ngModel" name="quantity" [(ngModel)]="quantity" required>
+
                   </div>
               </div>
             </div>

@@ -36,6 +36,7 @@ import { AboutUsComponent } from '../pages/about-us/about-us.component';
 import { AddProjetComponent } from './add-projet/add-projet.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MyAccountComponent } from '../pages/my-account/my-account.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { MyAccountComponent } from '../pages/my-account/my-account.component';
     AboutUsComponent,
     AddProjetComponent,
     InscriptionComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    ProfilComponent
   ],
   imports: [
     CommonModule,

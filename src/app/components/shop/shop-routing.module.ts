@@ -13,6 +13,7 @@ import { AboutUsComponent } from '../pages/about-us/about-us.component';
 import { AddProjetComponent } from './add-projet/add-projet.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MyAccountComponent } from '../pages/my-account/my-account.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 // Routes
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'faq', component: FaqComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'addd', component: AddProjetComponent },
+  { path: 'profile', component: ProfilComponent },
+
   { path: 'inscrit', component: InscriptionComponent },
   { path: 'pages/my-account', component: MyAccountComponent },
 

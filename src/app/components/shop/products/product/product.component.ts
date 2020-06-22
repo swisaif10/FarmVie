@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/modals/product.model';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,7 @@ export class ProductComponent implements OnInit {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
  @Input() product: Product;
 
-  constructor(private cartService: CartService, public productsService: ProductService, private wishlistService: WishlistService, private dialog: MatDialog, private router: Router ) { }
+  constructor(private sanitizer: DomSanitizer,private cartService: CartService, public productsService: ProductService, private wishlistService: WishlistService, private dialog: MatDialog, private router: Router ) { }
 
   ngOnInit() {
   }
@@ -50,5 +51,7 @@ export class ProductComponent implements OnInit {
       }
     });
   }
-
+  public getSantizeUrl(url : string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
 }

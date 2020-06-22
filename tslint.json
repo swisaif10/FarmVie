@@ -4,9 +4,7 @@
     "codelyzer"
   ],
   "rules": {
-    "array-type": false,
-    "arrow-parens": false,
-    "deprecation": {
+     "deprecation": {
       "severity": "warn"
     },
     "import-blacklist": [

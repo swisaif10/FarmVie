@@ -18,6 +18,7 @@ import { ShopModule } from './components/shop/shop.module';
 import { SharedModule } from './components/shared/shared.module';
 import { TokenStorage } from './components/shared/services/token-storage.service';
 import { AuthService } from './components/shared/services/auth-service.service';
+import { UserService } from './components/shared/services/user.service';
  
 
 @NgModule({
@@ -42,7 +43,7 @@ import { AuthService } from './components/shared/services/auth-service.service';
     AppRoutingModule,
     NgxImgZoomModule
   ],
-  providers: [TokenStorage,AuthService],
+  providers: [TokenStorage,AuthService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

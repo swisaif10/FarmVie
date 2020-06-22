@@ -2,7 +2,7 @@
 
     
 
-<div class="left-sidebar-wrapper sec-padding">
+<div class="left-sidebar-wrapper sec-padding" *ngIf="allItems">
 <div class="container">
   <div class="sidebar-wrapper" fxLayout='row' fxLayout.lt-md="column" >
       <div fxFlex="25" fxFlex.lt-sm="100" class="filter-sidenav" perfectScrollbar>
@@ -77,7 +77,7 @@
               </div>
               <div [@Animation]="animation" fxLayout="row wrap" class="products-wrapper">
                   <div *ngFor="let products of allItems | orderBy:sortByOrder | paginate: { itemsPerPage: 12, currentPage: page  }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
-                     <div class="product-box">
+                     <div class="product-box" >
                         <app-product [product]="products"></app-product>
                      </div>
                   </div>

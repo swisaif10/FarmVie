@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Product } from 'src/app/modals/product.model';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { Router } from '@angular/router';
+import { TokenStorage } from 'src/app/components/shared/services/token-storage.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-dialog',
@@ -17,8 +19,9 @@ export class ProductDialogComponent implements OnInit {
   public variantImage       :   any = '';
   public selectedColor      :   any = '';
   public selectedSize       :   any = '';
+  quantity:string
 
-  constructor(private router: Router, public productsService: ProductService, private cartService: CartService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public product: Product) { }
+  constructor(private token :TokenStorage,private httpClient: HttpClient,private router: Router, public productsService: ProductService, private cartService: CartService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public product: Product) { }
 
   ngOnInit() {
     this.productsService.products2().subscribe(product => this.products = product);
@@ -28,7 +31,20 @@ export class ProductDialogComponent implements OnInit {
 
   public addToCart(product: Product, quantity) {
     if (quantity == 0) return false;
-    this.cartService.addToCart(product, parseInt(quantity));
+    const uploadImageData = new FormData();
+    console.log(product.idProjet+this.quantity)
+           uploadImageData.append('quantity', this.quantity);
+           uploadImageData.append('id',""+ product.idProjet);
+
+    let headers = new HttpHeaders({
+      'Authorization':this.token.getToken()
+    })
+    this.httpClient.post('http://localhost:8080/user/investe', uploadImageData,{ headers: headers})
+ 
+      .subscribe((response) => {
+       }
+      );
+ 
   }
 
   public close(): void {

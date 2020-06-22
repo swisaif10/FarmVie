@@ -57,6 +57,8 @@
 
                       </div>
                       <div class="widget-text" *ngIf="tokenn!=null">
+                        <a fxShow="false" fxShow.gt-xs  [routerLink]="['/profile']"  routerLinkActive="router-link-active" ><mat-icon>person</mat-icon>profile</a>
+
                         <a fxShow="false" fxShow.gt-xs   routerLinkActive="router-link-active" (click)="logout()"><mat-icon>person</mat-icon>logout</a>
                       </div>
                   </div>

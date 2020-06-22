@@ -8,6 +8,7 @@ export type ProductColor = 'white' | 'black' | 'red' | 'green' | 'purple' | 'yel
 
 export class Product {
   id?: number;
+  idProjet?:number;
   name?: string;
   price?: number;
   salePrice?: number;

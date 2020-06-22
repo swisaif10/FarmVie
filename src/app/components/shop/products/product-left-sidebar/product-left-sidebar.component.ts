@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Product, ColorFilter } from 'src/app/modals/product.model';
 import { CartItem } from 'src/app/modals/cart-item';
 import { CartService } from 'src/app/components/shared/services/cart.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-left-sidebar',
@@ -54,9 +55,9 @@ export class ProductLeftSidebarComponent implements OnInit {
 
 
 
-  constructor(private productService: ProductService, private route: ActivatedRoute ,  private cartService: CartService) {
+  constructor(private sanitizer: DomSanitizer,private productService: ProductService, private route: ActivatedRoute ,  private cartService: CartService) {
     this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
-
+    (async () =>{
     this.route.params.subscribe(
       (params: Params) => {
         const category = params['category'];
@@ -65,9 +66,18 @@ export class ProductLeftSidebarComponent implements OnInit {
        this.products = products.slice(0.8);
        this.getTags(products)
        this.getColors(products)
+       console.log(this.allItems )
         })
       }
     )
+    await this.delay(1000);
+
+ 
+  })();
+    
+  }
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 
@@ -221,6 +231,7 @@ onBrendsChanged(newBrend) {
 
 
 }
+
 
 
 
