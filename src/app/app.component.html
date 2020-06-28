@@ -1,6 +1,6 @@
  <div class="sophia-app">
     <mat-sidenav-container fullscreen>
-        <mat-sidenav [opened]="false" mode="over"  #start  class="sidenav" *ngIf="valueLogin==1">
+        <mat-sidenav [opened]="false" mode="over"  #start  class="sidenav" *ngIf="valueLogin==1 && test2!=2">
             <button mat-icon-button color="warn" class="close" (click)="start.close()">
               <mat-icon color="warn">close</mat-icon>
             </button>
@@ -9,7 +9,7 @@
                 <app-sidebar *ngFor="let item of navItems" [item]="item"></app-sidebar>
             </div>
         </mat-sidenav>
-        <mat-toolbar class="main-topbar" [ngClass]="{topbar_four: url == '/home/four'}" *ngIf="valueLogin==1">
+        <mat-toolbar class="main-topbar" [ngClass]="{topbar_four: url == '/home/four'}" *ngIf="valueLogin==1 && test2!=2">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="top-bar container" >
                     <span fxHide="false" fxHide.gt-sm   >
                         <button mat-icon-button (click)="start.toggle()">
@@ -69,9 +69,10 @@
             </mat-toolbar-row>
       
           </mat-toolbar>
-          <app-header-three *ngIf="valueLogin==1"></app-header-three>
+          <app-header-three *ngIf="valueLogin==1 && test2!=2"></app-header-three>
+          <app-navadmin *ngIf="test2==2"></app-navadmin>
 <router-outlet></router-outlet>
-<app-footer-two  *ngIf="valueLogin==1"></app-footer-two>
+<app-footer-two  *ngIf="valueLogin==1 &&test2!=2"></app-footer-two>
  
  
 

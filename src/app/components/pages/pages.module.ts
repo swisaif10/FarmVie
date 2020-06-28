@@ -28,9 +28,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     CartComponent,
      WishlistComponent,
     CompareComponent,
-    CheckoutComponent,
-   // MyAccountComponent,
-    ErrorPageComponent
+    // MyAccountComponent,
+    ErrorPageComponent,
+    
 
   ]
 })

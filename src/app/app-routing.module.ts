@@ -4,6 +4,15 @@ import { MainComponent } from './components/main/main.component';
 import { HomeComponent } from './components/shop/home/home.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { HomeFourComponent } from './components/shop/home-four/home-four.component';
+import { NavadminComponent } from './components/admin/navadmin/navadmin.component';
+import { ListuserComponent } from './components/admin/listuser/listuser.component';
+import { ListprojetComponent } from './components/admin/listprojet/listprojet.component';
+import { UserService  as AuthGuard } from './components/shared/services/user.service';
+import { ListcontactComponent } from './components/admin/listcontact/listcontact.component';
+import { DialogdetaillComponent } from './components/admin/dialogdetaill/dialogdetaill.component';
+import { DialoglistinvestComponent } from './components/admin/dialoglistinvest/dialoglistinvest.component';
+import { DialogupdateComponent } from './components/admin/dialogupdate/dialogupdate.component';
+
 
 
 const appRoutes: Routes = [
@@ -11,6 +20,33 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '',
      pathMatch: 'full'
+  },
+  {
+    path: 'admin',
+    component: NavadminComponent,canActivate: [AuthGuard] 
+  },  {
+    path: 'detailadmin',
+    component: DialogdetaillComponent,canActivate: [AuthGuard] 
+  },
+  {
+    path: 'listinvest',
+    component: DialoglistinvestComponent,canActivate: [AuthGuard] 
+  },
+  {
+    path: 'updateadmin',
+    component: DialogupdateComponent,canActivate: [AuthGuard] 
+  },
+  {
+    path: 'listuser',
+    component: ListuserComponent,canActivate: [AuthGuard] 
+  },
+  {
+    path: 'listprojet',
+    component: ListprojetComponent,canActivate: [AuthGuard] 
+  },
+  {
+    path: 'listcontact',
+    component: ListcontactComponent,canActivate: [AuthGuard] 
   },
   {
     path: '',
@@ -35,6 +71,8 @@ const appRoutes: Routes = [
       },
     ]
   },
+  
+
   {
     path: '**',
     redirectTo: 'home/one'

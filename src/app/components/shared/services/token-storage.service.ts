@@ -1,18 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
 
 
 const TOKEN_KEY = 'AuthToken';
 
 @Injectable()
-export class TokenStorage {
+export class TokenStorage implements CanActivate{
+tokenn
+  constructor(private router: Router) { 
 
-  constructor() { }
-
+  }
+  canActivate(): boolean {
+    
+    if (this.getToken()==null) {
+      this.router.navigateByUrl('/products/all');
+      return false;
+    }
+    return true;
+  }
   signOut() {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.clear();
-  }
+location.reload()
 
+  }
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+ }
   public saveToken(token: string) {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.setItem(TOKEN_KEY,  token);

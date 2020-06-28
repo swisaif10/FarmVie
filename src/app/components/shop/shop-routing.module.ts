@@ -14,27 +14,37 @@ import { AddProjetComponent } from './add-projet/add-projet.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MyAccountComponent } from '../pages/my-account/my-account.component';
 import { ProfilComponent } from './profil/profil.component';
+import { CheckoutComponent } from '../pages/checkout/checkout.component';
+import { TokenStorage as AuthGuard } from '../shared/services/token-storage.service';
 
 
 // Routes
 const routes: Routes = [
-  
-  { path: 'one', component: HomeComponent },
+   { path: 'one', component: HomeComponent },
   { path: 'two', component: HomeTwoComponent },
   { path: 'three', component: HomeThreeComponent },
   { path: '', component: HomeFourComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'about', component: AboutUsComponent },
-  { path: 'addd', component: AddProjetComponent },
-  { path: 'profile', component: ProfilComponent },
+  { path: 'addd', component: AddProjetComponent,  canActivate: [AuthGuard] 
+},
+  { path: 'profile', component: ProfilComponent ,
+  canActivate: [AuthGuard] 
+
+},
 
   { path: 'inscrit', component: InscriptionComponent },
   { path: 'pages/my-account', component: MyAccountComponent },
+  { path: 'checkout/:id', component: CheckoutComponent },
 
   { path: 'five', component: HomeFiveComponent },
+  { path: 'home/product/:id', component: ProductDetailsComponent ,  canActivate: [AuthGuard] 
+},
+
   { path: 'products/:category', component: ProductLeftSidebarComponent },
-  { path: 'product/:id', component: ProductDetailsComponent }
+  { path: 'product/:id', component: ProductDetailsComponent ,  canActivate: [AuthGuard] 
+}
 
 
 ];

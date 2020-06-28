@@ -15,6 +15,12 @@ import { TokenStorage } from '../../shared/services/token-storage.service';
 })
 export class AddProjetComponent  {
 
+
+  irrigation="Oui"
+  siege="Oui"
+  biologique="Oui"
+  typeFinance="Investissement"
+
      test=1;
       public banners = [];
 public currencies = ['USD', 'EUR'];
@@ -77,10 +83,6 @@ this.currency = currency;
 public changeLang(flag){
 this.flag = flag;
 }
-      irrigation="oui"
-      siege="oui"
-      biologique="oui"
-      typeFinance="invertissement"
       nomArticle:String
       
        
@@ -109,41 +111,50 @@ this.flag = flag;
           this.selectedFile2 = event.target.files[0];
        
         }
-       
         onUpload(f: NgForm) {
-          this.test=2;
-     
-          console.log(this.selectedFile);
-      
+          
+          console.log(f)
+
           const uploadImageData = new FormData();
-       console.log(f.value);
-          uploadImageData.append('gevernorat', f.value['gevernorat']);
-          uploadImageData.append('delegation', f.value['delegation']);
+          uploadImageData.append('gevernorat', f.value['gouv']);
+          uploadImageData.append('delegation', f.value['ville']);
           uploadImageData.append('superficieE', f.value['superficieE']);
           uploadImageData.append('superficieT', f.value['superficieT']);
           uploadImageData.append('irrigation', f.value['irrigation']);
-    
           uploadImageData.append('siege', f.value['siege']);
-          uploadImageData.append('sol', this.selectedFile, this.selectedFile.name);
-          uploadImageData.append('nomProjet', f.value['nomProjet']);
+          uploadImageData.append('nomProjet', f.value['nom']);
           uploadImageData.append('biologique', f.value['biologique']);
           uploadImageData.append('type', f.value['type']);
           uploadImageData.append('description', f.value['description']);
-          uploadImageData.append('montantMin', f.value['montantMin']);
-          uploadImageData.append('typeFinance', f.value['typeFinance']);
-          uploadImageData.append('photoProjet', this.selectedFile2, this.selectedFile2.name);
-          console.log(f.value['irrigation'])
+          uploadImageData.append('montanttotal', f.value['montant']);
+          uploadImageData.append('montantMin', f.value['montantM']);
 
+          uploadImageData.append('typeFinance', f.value['typeFinance']);
+          uploadImageData.append('photoProjet', this.selectedFile, this.selectedFile.name);
+
+          console.log(uploadImageData)
           let headers = new HttpHeaders({
             'Authorization':this.token.getToken()
           })
-          this.httpClient.post('http://localhost:8080/projet/add', uploadImageData,{ headers: headers})
+          
+          this.httpClient.post('http://localhost:8080/projet/add', uploadImageData, { headers: headers})
        
-            .subscribe((response) => {
-              this.router.navigateByUrl('products/:category')       
-            }
+          .subscribe((response) => {
+          
+          } );
+     
+  
+
+      //     let headers = new HttpHeaders({
+      //       'Authorization':this.token.getToken()
+      //     })
+      //     this.httpClient.post('http://localhost:8080/projet/add', uploadImageData,{ headers: headers})
        
-            );
+      //       .subscribe((response) => {
+      //         this.router.navigateByUrl('products/:category')       
+      //       }
+       
+      //       );
             
     
        

@@ -26,11 +26,10 @@ public flags = [
 public flag:any;
 
 products: Product[];
-
+show =false ;
 indexProduct: number;
 shoppingCartItems: CartItem[] = [];
 wishlistItems  :   Product[] = [];
-
 
 public slides = [
   { title: 'Huge sale', subtitle: 'Up to 70%', image: 'assets/images/carousel/banner1.jpg' },
@@ -76,29 +75,25 @@ public changeLang(flag){
 this.flag = flag;
 }
   onUpload(f: NgForm) {
-    const uploadImageData = new FormData();
-       console.log(f.value);
-          uploadImageData.append('name', f.value['name']);
-          uploadImageData.append('prenom', f.value['prenom']);
-          uploadImageData.append('ddn', f.value['ddn']);
-          uploadImageData.append('email', f.value['email']);
-          uploadImageData.append('RS', f.value['RS']);
-    
-          uploadImageData.append('adresseP', f.value['adresseP']);
-          uploadImageData.append('governorat', f.value['governorat']);
-          uploadImageData.append('delegation', f.value['delegation']);
-          uploadImageData.append('codeP', f.value['codeP']);
-          uploadImageData.append('password', f.value['password']);
-          uploadImageData.append('numtel', f.value['numtel']);
-
-
- 
-          this.httpClient.post('http://localhost:8080/user/add', uploadImageData)
+       let user={
+        'name':f.value['nom'],
+        'prenom': f.value['prenom'],
+        'ddn': f.value['ddn'],
+        'email': f.value['email'],
+        'rs': f.value['RS'],
+        'adresseP': f.value['adresseP'],
+        'governorat': f.value['governorat'],
+        'delegation': f.value['delegation'],
+        'codeP': f.value['codeP'],
+        'password':f.value['password'],
+        'numtel': f.value['num'],
+       }
+       console.log(user)
+          this.httpClient.post('http://localhost:8080/user/add', user)
        
           .subscribe((response) => {
           
-          }
-     
-          );
+          } );
   }
+
 }

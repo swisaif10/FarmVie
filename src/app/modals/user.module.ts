@@ -16,6 +16,7 @@ export class UserModule {
   email?: string;
   numtel?: string;
   governorat?: string;
+  argent?:number
 
 
  }

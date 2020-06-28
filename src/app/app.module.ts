@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoComponent } from './components/demo/demo.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxImgZoomModule } from 'ngx-img-zoom';
+import {ProgressBarModule} from "angular-progress-bar"
 
 
 import { MainComponent } from './components/main/main.component';
@@ -19,6 +20,13 @@ import { SharedModule } from './components/shared/shared.module';
 import { TokenStorage } from './components/shared/services/token-storage.service';
 import { AuthService } from './components/shared/services/auth-service.service';
 import { UserService } from './components/shared/services/user.service';
+import { NavadminComponent } from './components/admin/navadmin/navadmin.component';
+import { ListuserComponent } from './components/admin/listuser/listuser.component';
+import { ListprojetComponent } from './components/admin/listprojet/listprojet.component';
+import { ListcontactComponent } from './components/admin/listcontact/listcontact.component';
+import { DialogdetaillComponent } from './components/admin/dialogdetaill/dialogdetaill.component';
+import { DialoglistinvestComponent } from './components/admin/dialoglistinvest/dialoglistinvest.component';
+import { DialogupdateComponent } from './components/admin/dialogupdate/dialogupdate.component';
  
 
 @NgModule({
@@ -26,6 +34,14 @@ import { UserService } from './components/shared/services/user.service';
     AppComponent,
     DemoComponent,
     MainComponent,
+    NavadminComponent,
+    ListuserComponent,
+    ListprojetComponent,
+    ListcontactComponent,
+    DialogdetaillComponent,
+    DialoglistinvestComponent,
+    DialogupdateComponent,
+     
      
 
 
@@ -41,7 +57,8 @@ import { UserService } from './components/shared/services/user.service';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgxImgZoomModule
+    NgxImgZoomModule,
+    ProgressBarModule
   ],
   providers: [TokenStorage,AuthService,UserService],
   bootstrap: [AppComponent]

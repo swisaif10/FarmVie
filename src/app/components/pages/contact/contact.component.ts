@@ -3,7 +3,10 @@ import { Product } from 'src/app/modals/product.model';
 import { CartItem } from 'src/app/modals/cart-item';
 import { ProductService } from '../../shared/services/product.service';
 import { CartService } from '../../shared/services/cart.service';
-
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
+ 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -26,8 +29,9 @@ export class ContactComponent implements OnInit {
   indexProduct: number;
   shoppingCartItems: CartItem[] = [];
   wishlistItems  :   Product[] = [];
-
-
+  message
+  name
+  email
   public slides = [
     { title: 'Huge sale', subtitle: 'Up to 70%', image: 'assets/images/carousel/banner1.jpg' },
     { title: 'Biggest discount', subtitle: 'Check the promotion', image: 'assets/images/carousel/banner2.jpg' },
@@ -36,7 +40,7 @@ export class ContactComponent implements OnInit {
     { title: 'Massive sale', subtitle: 'Only for today', image: 'assets/images/carousel/banner5.jpg' }
   ];
 
-  constructor(private productService: ProductService,  private cartService: CartService) {
+  constructor(public snackBar: MatSnackBar,private productService: ProductService,  private cartService: CartService,private httpClient: HttpClient) {
     this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
 
   }
@@ -61,7 +65,26 @@ export class ContactComponent implements OnInit {
 
 }
 
+onUpload(f:NgForm){
+  const uploadImageData = new FormData();
+  uploadImageData.append("name",f.value['name'])
+  uploadImageData.append("email",f.value['email'])
+  uploadImageData.append("subject",f.value['subject'])
+  uploadImageData.append("description",f.value['content'])
+  this.httpClient.post('http://localhost:8080/contact/add', uploadImageData)
+       
+  // .subscribe((response) => {
+    
+  // }
 
+  // );
+  f.resetForm();
+  // f.name["name"]="";
+  this.message = 'votre message a été envoyé avec succès  ';
+    status = 'success';
+    this.snackBar.open(this.message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+    // location.reload()
+}
 
 
 

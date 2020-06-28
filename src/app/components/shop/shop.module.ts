@@ -19,6 +19,7 @@ import { HomeTwoComponent } from './home-two/home-two.component';
 import { HomeThreeComponent } from './home-three/home-three.component';
 // Import the library
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import {ProgressBarModule} from "angular-progress-bar"
 
 import { ProductCarouselComponent } from './../shop/home/product-carousel/product-carousel.component';
 import { from } from 'rxjs';
@@ -37,6 +38,8 @@ import { AddProjetComponent } from './add-projet/add-projet.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MyAccountComponent } from '../pages/my-account/my-account.component';
 import { ProfilComponent } from './profil/profil.component';
+import { CheckoutComponent } from '../pages/checkout/checkout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -67,20 +70,22 @@ import { ProfilComponent } from './profil/profil.component';
     AboutUsComponent,
     AddProjetComponent,
     InscriptionComponent,
+    CheckoutComponent,
     MyAccountComponent,
     ProfilComponent
   ],
   imports: [
     CommonModule,
     ShopRoutingModule,
+    ProgressBarModule,
     SharedModule,
     SwiperModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxPaginationModule,
-    NgxImageZoomModule.forRoot() // <-- Add this line
-
+    NgxImageZoomModule.forRoot(), // <-- Add this line
+    BrowserAnimationsModule
   ],
   exports: [
     ProductDialogComponent,

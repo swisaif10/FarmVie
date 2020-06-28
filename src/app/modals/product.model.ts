@@ -8,8 +8,12 @@ export type ProductColor = 'white' | 'black' | 'red' | 'green' | 'purple' | 'yel
 
 export class Product {
   id?: number;
+  sol?:string
   idProjet?:number;
   name?: string;
+  nameU?: string;
+  emailUser?: string;
+
   price?: number;
   salePrice?: number;
   discount?: number;
@@ -26,7 +30,40 @@ export class Product {
   nomProjet?: string;
   photoProjet?: string;
   montantMin?: string;
+  idUser?:number
+  gevernorat?:string
+  delegation?:string
+  superficieE?:string
+  superficieT?:string
+  biologique?:string
+  etat?:string
+  irrigation?:string
+  siege?:string
+  type?:string
+  montantTotal?:number
+  montantRecu?:number
+  datadeployment?:string
+  typeFinance?:string
+  pourcentage?:string
+  ip?:string
   constructor(
+      photoProjet?: string,
+    montantMin?: string,
+  idUser?:number,
+  gevernorat?:string,
+  delegation?:string,
+  superficieE?:string,
+  superficieT?:string,
+  biologique?:string,
+  irrigation?:string,
+  siege?:string,
+  type?:string,
+  montantTotal?:number,
+  montantRecu?:number,
+  datadeployment?:string,
+  typeFinance?:string,
+  pourcentage?:number,
+sol?:string,
     id?: number,
     name?: string,
     price?: number,
@@ -41,8 +78,11 @@ export class Product {
     sale?: boolean,
     category?: string,
     tags?: ProductTags[],
-    colors?: ProductColor[]
+    colors?: ProductColor[],
+
   ) {
+    this.idUser=idUser
+this.montantTotal=montantTotal
     this.id = id;
     this.name = name;
     this.price = price;

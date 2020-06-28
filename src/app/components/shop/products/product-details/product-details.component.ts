@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material';
 import { CartService } from 'src/app/components/shared/services/cart.service';
 import { SwiperDirective, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { ProductZoomComponent } from './product-zoom/product-zoom.component';
+import { TokenStorage } from 'src/app/components/shared/services/token-storage.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -23,7 +25,9 @@ export class ProductDetailsComponent implements OnInit {
 
   public product            :   Product = {};
   public products           :   Product[] = [];
-
+  imagebig:string=""
+  imagesmall:string=""
+  test:string
   public image: any;
   public zoomImage: any;
 
@@ -32,11 +36,21 @@ export class ProductDetailsComponent implements OnInit {
   index: number;
   bigProductImageIndex = 0;
 
-  constructor(private route: ActivatedRoute, public productsService: ProductService, public dialog: MatDialog, private router: Router, private cartService: CartService) {
+  constructor(private token :TokenStorage,private httpClient: HttpClient,private route: ActivatedRoute, public productsService: ProductService, public dialog: MatDialog, private router: Router, private cartService: CartService) {
     this.route.params.subscribe(params => {
       const id = +params['id'];
-      this.productsService.getProduct(id).subscribe(product => this.product = product)
-    });
+      let headers = new HttpHeaders({
+        'Authorization':this.token.getToken()
+      })
+      this.httpClient.get('http://localhost:8080/projet/getArticles2/'+id,{ headers: headers})
+   
+        .subscribe((response) => {
+          this.product=response as Product
+          console.log(this.product+"azz")
+          this.imagebig=this.product.photoProjet
+          this.imagesmall=this.product.sol
+         }
+        );    });
    }
 
   ngOnInit() {
@@ -92,10 +106,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
-  public selectImage(index) {
-    console.log(this.product)
-    console.log(index)
-    this.bigProductImageIndex = index;
+  public selectImage() {
+    this.test=this.imagebig
+    this.imagebig=this.imagesmall
+    this.imagesmall=this.test
+     
   }
 
 
@@ -127,9 +142,8 @@ getRelatedProducts() {
 
    // Add to cart
    public buyNow(product: Product, quantity) {
-    if (quantity > 0)
-      this.cartService.addToCart(product,parseInt(quantity));
-      this.router.navigate(['/pages/checkout']);
+    if ((quantity > 0 )&&(product))
+       this.router.navigate(['/checkout',product.idProjet]);
  }
 
 

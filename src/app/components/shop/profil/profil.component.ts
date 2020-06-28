@@ -78,7 +78,9 @@ await this.delay(1000);
 
 
 }
-
+public buyNow(id) {
+  this.router.navigate(['/home/product', id]);
+ }
 public getSantizeUrl(url : string) {
   return this.sanitizer.bypassSecurityTrustUrl(url);
 }

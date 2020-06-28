@@ -1,14 +1,14 @@
 
   <div class="commerce-buttons" fxLayout="row" fxLayoutAlign="end center">
 
-    <button mat-button class="flex-row-button mat-button" fxLayoutAlign="space-between center" [matMenuTriggerFor]="menu">
+    <button mat-button class="flex-row-button mat-button" fxLayoutAlign="space-between center"  >
       <div class="mat-button-wrapper">
           <div class="" >
               <mat-icon class="mat-icon-lg mat-icon material-icons">local_grocery_store</mat-icon>
-              <span class="cart-count-wrapper">{{shoppingCartItems.length}}</span>
-            </div>
-            <div class="top-cart">
-                <span>{{ getTotal() | async | currency:productService?.currency:'symbol' }}</span>
+             </div>
+             
+            <div class="top-cart"      >
+                <span>{{ argent  | currency:productService?.currency:'symbol' }}</span>
             </div>
       </div>
     </button>

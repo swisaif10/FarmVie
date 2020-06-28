@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/components/shared/services/product.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product, ColorFilter } from 'src/app/modals/product.model';
-import { CartItem } from 'src/app/modals/cart-item';
-import { CartService } from 'src/app/components/shared/services/cart.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-left-sidebar',
@@ -26,58 +23,19 @@ export class ProductLeftSidebarComponent implements OnInit {
   public products: Product[] = [];
   public tags         :   any[] = [];
   public colors       :   any[] = [];
- 
 
-
-  public banners = [];
-  public currencies = ['USD', 'EUR'];
-  public currency:any;
-  public flags = [
-    
-    { name:'French', image: 'assets/images/flags/fr.svg' },
-    { name:'Arabe', image: 'assets/images/flags/tr.svg' }
-  ]
-  public flag:any;
-
- 
-  indexProduct: number;
-  shoppingCartItems: CartItem[] = [];
-  wishlistItems  :   Product[] = [];
-
-
-  public slides = [
-    { title: 'Huge sale', subtitle: 'Up to 70%', image: 'assets/images/carousel/banner1.jpg' },
-    { title: 'Biggest discount', subtitle: 'Check the promotion', image: 'assets/images/carousel/banner2.jpg' },
-    { title: 'Biggest sale', subtitle: 'Dont miss it', image: 'assets/images/carousel/banner3.jpg' },
-    { title: 'Our best products', subtitle: 'Special selection', image: 'assets/images/carousel/banner4.jpg' },
-    { title: 'Massive sale', subtitle: 'Only for today', image: 'assets/images/carousel/banner5.jpg' }
-  ];
-
-
-
-  constructor(private sanitizer: DomSanitizer,private productService: ProductService, private route: ActivatedRoute ,  private cartService: CartService) {
-    this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
-    (async () =>{
+  constructor(private productService: ProductService, private route: ActivatedRoute) {
     this.route.params.subscribe(
       (params: Params) => {
         const category = params['category'];
-        this.productService.getProductByCategory(category).subscribe(products => {
+        this.productService.products2().subscribe(products => {
        this.allItems = products;
        this.products = products.slice(0.8);
        this.getTags(products)
        this.getColors(products)
-       console.log(this.allItems )
         })
       }
     )
-    await this.delay(1000);
-
- 
-  })();
-    
-  }
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 
@@ -119,22 +77,6 @@ export class ProductLeftSidebarComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.productService.getBanners()
-    .subscribe(
-      data => this.banners = data
-    );
-
-
-
- this.productService.getProducts()
- .subscribe(
-   (product: Product[]) => {
-     this.products = product
-   }
- )
- this.currency = this.currencies[0];
-  this.flag = this.flags[0];
-
   }
 
 
@@ -215,7 +157,7 @@ public onPageChanged(event){
 
 
    this.allItems = this.products.filter((item: Product) => {
-     return item.price >= price.priceFrom && item.price <= price.priceTo
+     return item.montantTotal >= price.priceFrom && item.montantTotal <= price.priceTo
     });
      console.log(this.products);
 
@@ -231,16 +173,4 @@ onBrendsChanged(newBrend) {
 
 
 }
-
-
-
-
-
-public changeCurrency(currency){
-  this.currency = currency;
-}
-public changeLang(flag){
-  this.flag = flag;
-}
-
 }

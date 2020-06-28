@@ -17,8 +17,13 @@ export class ProductComponent implements OnInit {
 
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
  @Input() product: Product;
+ pourcentage=0
 
-  constructor(private sanitizer: DomSanitizer,private cartService: CartService, public productsService: ProductService, private wishlistService: WishlistService, private dialog: MatDialog, private router: Router ) { }
+  constructor(private sanitizer: DomSanitizer,private cartService: CartService, public productsService: ProductService, private wishlistService: WishlistService, private dialog: MatDialog, private router: Router ) {
+ 
+
+
+   }
 
   ngOnInit() {
   }
@@ -47,7 +52,7 @@ export class ProductComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(product => {
       if(product){
-        this.router.navigate(['/products', product.id, product.name]);
+        this.router.navigate(['/products', product.id, product.nomProjet]);
       }
     });
   }

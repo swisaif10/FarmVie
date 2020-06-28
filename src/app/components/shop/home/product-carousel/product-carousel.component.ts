@@ -17,10 +17,15 @@ import { WishlistService } from 'src/app/components/shared/services/wishlist.ser
 export class ProductCarouselComponent implements OnInit {
   @Output() onOpenProductDialog: EventEmitter<any> = new EventEmitter();
   @Input('product') product: Array<Product> = [];
+  product2: Array<Product> = [];
   public config: SwiperConfigInterface = {};
   constructor(private dialog: MatDialog, private router: Router, private cartService: CartService, private productService: ProductService, private wishlistService: WishlistService) { }
 
   ngOnInit() {
+    this.productService.products2().subscribe(product => {
+this.product2=product 
+console.log(this.product2)     
+    });
   }
   ngAfterViewInit(){
     this.config = {

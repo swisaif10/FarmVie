@@ -14,7 +14,7 @@
                       <button mat-icon-button  fxHide="false" fxHide.gt-md>
                          <mat-icon>fullscreen</mat-icon>
                       </button>
-                      <img [src]="product.pictures[bigProductImageIndex].big"/>
+                      <img [src]="imagebig"/>
                    </div>
                    <a (click)="openProductDialog(product, bigProductImageIndex)" style="cursor: pointer;"><mat-icon>zoom_in</mat-icon></a>
                 </mat-card>
@@ -23,13 +23,10 @@
                <div class="small-carousel">
                    <div class="swiper-container" [swiper]="config">
                        <div class="swiper-wrapper">
-                           <div *ngFor="let image of product?.pictures; let i=index" class="swiper-slide">
-                               <mat-card (click)="selectImage(i)" class="p-1">
-                                   <img [src]="image.small" class="swiper-lazy"/>
-                                   <div class="swiper-lazy-preloader"></div>
-                               </mat-card>
-                           </div>
-                       </div>
+                                <mat-card (click)="selectImage()" class="p-1">
+                                   <img [src]="imagesmall" class="swiper-lazy"/>
+                                </mat-card>
+                        </div>
                        <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
                        <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
                    </div>
@@ -51,23 +48,9 @@
                           <span class="avalibility" *ngIf="counter > product.stock"><span>Out of Stock</span></span>
                        </p>
                     </div>
-                    <div class="quantity">
-                       <span class="text-muted fw-500">Quantity</span>
-                       <div fxLayout="row" fxLayout.xs="column"  class="text-muted">
-                          <div fxLayout="row" fxLayoutAlign="center start">
-                             <button mat-icon-button matTooltip="Remove" (click)="decrement()">
-                                <mat-icon>remove</mat-icon>
-                             </button>
-                             <input type="text" name="quantity" value="{{counter}}" class="form-control input-number">
-                             <button mat-icon-button matTooltip="Add" (click)="increment()">
-                                <mat-icon>add</mat-icon>
-                             </button>
-                          </div>
-                       </div>
-                    </div>
+                     
                     <div class="buttons mt-20">
-                       <button mat-raised-button color="primary" class="btn-project mr-10" (click)="addToCart(product, counter)">ADD TO CARD</button>
-                       <button mat-raised-button color="primary" class="btn-project" (click)="buyNow(product, counter)">BUY NOW</button>
+                        <button mat-raised-button color="primary" class="btn-project" (click)="buyNow(product, counter)">BUY NOW</button>
                     </div>
                  </div>
               </div>

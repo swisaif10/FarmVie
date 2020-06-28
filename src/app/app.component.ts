@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { CartService } from './components/shared/services/cart.service';
 import { Router } from '@angular/router';
 import { PlatformLocation } from '@angular/common';
+import * as jwt_decode from 'jwt-decode';
+import { UserService } from './components/shared/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit{
   public banners = [];
   public currencies = ['USD', 'EUR'];
   public currency:any;
+  public role:string
   public flags = [
     
     { name:'French', image: 'assets/images/flags/fr.svg' },
@@ -46,12 +49,21 @@ export class AppComponent implements OnInit{
   ];
   tokenn=null;
   valueLogin=1 ;
-  constructor(private spinner: NgxSpinnerService,private router :Router,private productService: ProductService, private token :TokenStorage,private httpClient: HttpClient, private cartService: CartService,locationn: PlatformLocation) {
+  test2=1
+  constructor(private userservie :UserService,private spinner: NgxSpinnerService,private router :Router,private productService: ProductService, private token :TokenStorage,private httpClient: HttpClient, private cartService: CartService,locationn: PlatformLocation) {
     this.cartService.getItems().subscribe(shoppingCartItems => this.shoppingCartItems = shoppingCartItems);
   this.tokenn=this.token.getToken()
   if(this.tokenn!=null){
     this.valueLogin=1 ;
+    var decoded = jwt_decode(this.tokenn); 
+    console.log(decoded.aud);
+    if(decoded.aud=='[ROLE_ADMIN]')  {
+      this.router.navigateByUrl('/listuser')
 
+      
+this.test2=2
+console.log(this.test2)
+    }
   }
   else if(location.href.substr(location.href.length-7)=="account"){
     this.valueLogin=2 ;
@@ -64,7 +76,7 @@ export class AppComponent implements OnInit{
 
       if(this.tokenn!=null){
       this.valueLogin=1 ;
-  
+      
     }else if(location.href.substr(location.href.length-7)=="account"){
       this.valueLogin=2 ;
   
@@ -135,6 +147,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     /** spinner starts on init */
     this.spinner.show();
+    
 
     setTimeout(() => {
       /** spinner ends after 5 seconds */
@@ -165,7 +178,6 @@ export class AppComponent implements OnInit{
     if(this.token.getToken()==null){
         this.tokenn=null
        
-        location.reload()
    }
 
 }

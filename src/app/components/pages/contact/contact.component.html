@@ -12,23 +12,23 @@
          <li>
             <i class="material-icons">home </i>
             <br>
-          <h4>Address</h4>
+          <h4>Adresse</h4>
           <br>
-         <p class="text-muted">123 Main Street, Anytown, CA 12345 – USA</p>
+         <p class="text-muted">15, Avenue de Carthage, 1000, Tunis.</p>
          </li>
          <li>
             <i class="material-icons">call </i>
             <br>
-          <h4>Phone</h4>
+          <h4>Téléphone</h4>
           <br>
-          <p class="text-muted">123 Main Street, Anytown, CA 12345 – USA</p>
+          <p class="text-muted">(+216)58 58 06 41</p>
          </li>
          <li>
             <i class="material-icons">email </i>
             <br>
           <h4>Email</h4>
           <br>
-          <p class=" text-muted text-muted">123 Main Street, Anytown, CA 12345 – USA</p>
+          <p class=" text-muted text-muted">support@farmvie.com</p>
          </li>
        </ul>
     </div>
@@ -36,7 +36,7 @@
         <div class="title">
             <h3>Contact us</h3>
         </div>
-        <form fxLayout="row wrap">
+        <form fxLayout="row wrap" (ngSubmit)="onUpload(f)" #f="ngForm">
           <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
               <mat-form-field class="w-100">
                   <input matInput placeholder="Your Name (required)" #name="ngModel" ngModel name="name" required>

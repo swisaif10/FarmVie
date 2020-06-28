@@ -1,26 +1,30 @@
 <div class="product-item" *ngIf="product.photoProjet" >
    <mat-card fxLayout="column">
      <div class="product-img">
-         <a class="product-link" [routerLink]="['/home/product', product.idProjet]">
-           <img [src]=getSantizeUrl(product.photoProjet) alt="">
+         <a class="product-link" (click)="openProductDialog(product)">
+            
+           <img [src]=getSantizeUrl(product.photoProjet) alt=""  >
         </a>
      </div>
       <div class="product-info-wrapper">
-         <span class="category">{{product.email}}</span>
+         <span class="category">{{product.gevernorat}}</span>
          <div class="title-wrap">
             <h4>{{product.nomProjet}}</h4>
          </div>
          <div class="stars">
-            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
-            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+            <progress-bar   [progress]="product.pourcentage " [color-degraded]="{'0': '#000000',  '40': '#4FC3F7', '70': '#8BC34A'}">>
+            </progress-bar>
          </div>
+         <div  class="product-info-wrapper" fxLayout="row" fxLayoutAlign="space-between center">
+            
+            <p> collecté/Totale:  {{product.montantRecu }}/{{product.montantTotal }} DT  
+         </p>
+           </div>
+         
          <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
-          <p>{{product.montantMin  }}</p>
-         <a (click)="addToCart(product)"><mat-icon class="mat-icon-lg mat-icon material-icons">shopping_cart</mat-icon></a>
-         </div>
+           
+           </div>
+           
          <div class="icons" fxLayout="column">
             <a (click)="addToWishlist(product)"><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon></a>
             <a (click)="openProductDialog(product)"><mat-icon>remove_red_eye</mat-icon></a>

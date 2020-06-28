@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subscriber } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from 'src/app/modals/product.model';
 import { MatSnackBar } from '@angular/material';
 import { map } from 'rxjs/operators';
+import { TokenStorage } from './token-storage.service';
 
 
 
@@ -14,7 +15,7 @@ let products = JSON.parse(localStorage.getItem("compareItem")) || [];
   providedIn: 'root'
 })
 export class ProductService {
-  public currency : string = 'USD';
+  public currency : string = 'DT';
   public catalogMode : boolean = false;
 
   private _url: string = "assets/data/";
@@ -22,12 +23,15 @@ export class ProductService {
 
   public compareProducts : BehaviorSubject<Product[]> = new BehaviorSubject([]);
   public observer   :  Subscriber<{}>;
-
-  constructor(private httpClient: HttpClient, public snackBar: MatSnackBar) {
+tokenn
+  constructor(private httpClient: HttpClient, public snackBar: MatSnackBar,private token:TokenStorage) {
    this.compareProducts.subscribe(products => products = products)
   }
    products2():Observable<Product[]> {
-    return  this.httpClient.get<Product[]>('http://localhost:8080/projet/getimage');
+  
+      return  this.httpClient.get<Product[]>('http://localhost:8080/projet/getimage');
+
+    
 
   }
 
@@ -115,7 +119,6 @@ public removeFromCompare(product: Product) {
 
    // Get Products By category
    public getProductByCategory(category: string): Observable<Product[]> {
-    return this.products2()
-  }
+    return  this.httpClient.get<Product[]>('http://localhost:8080/projet/getArticles/'+category);  }
 
 }

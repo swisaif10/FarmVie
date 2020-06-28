@@ -3,7 +3,7 @@ import { ProductService } from 'src/app/components/shared/services/product.servi
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Product } from 'src/app/modals/product.model';
 import { CartService } from 'src/app/components/shared/services/cart.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TokenStorage } from 'src/app/components/shared/services/token-storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -21,10 +21,17 @@ export class ProductDialogComponent implements OnInit {
   public selectedSize       :   any = '';
   quantity:string
 
-  constructor(private token :TokenStorage,private httpClient: HttpClient,private router: Router, public productsService: ProductService, private cartService: CartService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public product: Product) { }
+  constructor(private route :ActivatedRoute,private token :TokenStorage,private httpClient: HttpClient,private router: Router, public productsService: ProductService, private cartService: CartService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public product: Product) { }
 
   ngOnInit() {
-    this.productsService.products2().subscribe(product => this.products = product);
+    this.productsService.products2().subscribe(product => 
+      this.products = product
+      
+      
+      );
+       
+
+      
 
   }
 
@@ -63,8 +70,14 @@ export class ProductDialogComponent implements OnInit {
 
      // Add to cart
      public buyNow() {
-      this.router.navigate(['/home/product', this.product.id]);
-      this.close();
+       if(this.token.getToken()!=null){
+      this.router.navigate(['/home/product', this.product.idProjet]);
+      this.close();}
+      else{
+        this.router.navigateByUrl("/pages/my-account");
+        this.close();
+        
+      }
    }
 
 }
